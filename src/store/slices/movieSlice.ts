@@ -62,7 +62,7 @@ const movieSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
-    setFilters: (state, action) => {
+    setFilters: (state: any, action) => {
       state.list.filters = {
         ...state.list.filters,
         ...action.payload,

@@ -24,6 +24,28 @@ const Table: FC<TableProps> = ({
   rowsPerPage,
   empty,
 }) => {
+  const loadingContent = [...Array(rowsPerPage)].map((_i, index) => (
+    <TableSkeleton key={index} />
+  ));
+
+  const tableRows = rows.map((row, index) => (
+    <TableRow key={index}>
+      {columns.map((column) =>
+        column.render ? (
+          <TableCell key={`${column.key}-${index}`}>
+            {column?.render(row)}
+          </TableCell>
+        ) : (
+          <TableCell key={`${column.key}-${index}`}>
+            {row[column.key]}
+          </TableCell>
+        )
+      )}
+    </TableRow>
+  ));
+
+  const tableContent = loading ? loadingContent : tableRows;
+
   return (
     <TableContainer>
       <MUITable size="medium" sx={{ minWidth: 475, width: "100%", ...style }}>
@@ -35,25 +57,7 @@ const Table: FC<TableProps> = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {loading
-            ? [...Array(rowsPerPage)].map((_i, index) => (
-                <TableSkeleton key={index} />
-              ))
-            : rows.map((row, index) => (
-                <TableRow key={index}>
-                  {columns.map((column) =>
-                    column.render ? (
-                      <TableCell key={`${column.key}-${index}`}>
-                        {column?.render(row)}
-                      </TableCell>
-                    ) : (
-                      <TableCell key={`${column.key}-${index}`}>
-                        {row[column.key]}
-                      </TableCell>
-                    )
-                  )}
-                </TableRow>
-              ))}
+          {tableContent}
           {empty && <TableNoData />}
         </TableBody>
       </MUITable>
