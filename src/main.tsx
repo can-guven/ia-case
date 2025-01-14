@@ -1,7 +1,10 @@
+/** Dependencies */
 import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
+
+/** Components */
+import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

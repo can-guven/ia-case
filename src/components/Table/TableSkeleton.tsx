@@ -1,8 +1,5 @@
 /** Dependencies */
-import Stack from "@mui/material/Stack";
-import Skeleton from "@mui/material/Skeleton";
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
+import { Skeleton, Stack, TableCell, TableRow } from "@mui/material";
 
 const TableSkeleton = () => {
   return (

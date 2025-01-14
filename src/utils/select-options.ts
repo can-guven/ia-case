@@ -8,6 +8,10 @@ export const TYPES = [
     value: "series",
   },
   {
+    label: "GAME",
+    value: "game",
+  },
+  {
     label: "EPISODE",
     value: "episode",
   },

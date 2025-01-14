@@ -1,4 +1,7 @@
+/** Dependencies */
 import axios from "axios";
+
+/** Config */
 import { OMDB_API, OMDB_API_KEY } from "../config";
 
 const Axios = axios.create({ baseURL: OMDB_API });
