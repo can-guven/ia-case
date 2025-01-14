@@ -1,11 +1,16 @@
 # Invent Analytics Frontend Developer Case
 
-- Clone Project [ia-case](https://github.com/can-guven/ia-case.git)
+## Installation
 
-```js
+```bash
 npm install
 ```
 
-```js
+## Basic usage
+
+```bash
+# VITE v6.0.7 ready in http://localhost:5173
 npm run dev
 ```
+
+Navigate to [http://localhost:5173](http://localhost:5173). The app will automatically reload if you change any of the source files.
