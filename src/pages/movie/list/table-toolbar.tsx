@@ -1,5 +1,5 @@
 /** Dependencies */
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   FormControl,
   InputLabel,
@@ -17,7 +17,11 @@ import { useDebounce } from "use-debounce";
 import { setFilters } from "../../../store/slices/movieSlice";
 import { TYPES } from "../../../utils/select-options";
 
+const PAGE_START = 0;
+
 const MovieTableToolBar = () => {
+  const isFirstRenderRef = useRef(true);
+
   const {
     list: { filters },
   } = useSelector((state: any) => state.movie);
@@ -52,15 +56,22 @@ const MovieTableToolBar = () => {
     },
     [dispatch, setFilters]
   );
-
   useEffect(() => {
-    dispatch(
-      setFilters({
-        name: debouncedName,
-        year: debouncedYear,
-      })
-    );
-  }, [debouncedName, debouncedYear]);
+    if (isFirstRenderRef.current) {
+      isFirstRenderRef.current = false;
+      return;
+    }
+
+    if (debouncedName || debouncedYear) {
+      dispatch(
+        setFilters({
+          name: debouncedName,
+          year: debouncedYear,
+          page: PAGE_START,
+        })
+      );
+    }
+  }, [debouncedName, debouncedYear, dispatch]);
 
   return (
     <Stack

@@ -25,22 +25,16 @@ const List = () => {
     },
   } = useSelector((state: any) => state.movie);
 
-  const { page, rowsPerPage, handleChangePage, handleChangeRowsPerPage } =
+  const { rowsPerPage, handleChangePage, handleChangeRowsPerPage } =
     usePagination({
-      defaultPage: 0,
+      page: movieFilters.page,
+      setPage: (value) => dispatch(setFilters({ page: value })),
       defaultRowsPerPage: 10,
     });
 
   useEffect(() => {
-    const newPage = page + 1;
-    if (movieFilters.page != newPage) {
-      dispatch(setFilters({ page: newPage }));
-    }
-  }, [page]);
-
-  useEffect(() => {
     dispatch(fetchMoviesAsync(movieFilters));
-  }, [dispatch, movieFilters]);
+  }, [dispatch, movieFilters, fetchMoviesAsync]);
 
   const tableColumns = useMemo(() => {
     return [
@@ -87,7 +81,7 @@ const List = () => {
           empty={!moviesLoading && movies?.length == 0}
         />
         <TablePagination
-          page={page}
+          page={movieFilters.page}
           rowsPerPage={rowsPerPage}
           handleChangePage={handleChangePage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}

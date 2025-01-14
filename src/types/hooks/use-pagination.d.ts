@@ -1,4 +1,5 @@
 export interface UsePaginationOptions {
-  defaultPage?: number;
+  page?: number;
+  setPage: (value) => void;
   defaultRowsPerPage?: number;
 }

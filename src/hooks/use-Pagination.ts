@@ -5,10 +5,10 @@ import { useCallback, useState } from "react";
 import { UsePaginationOptions } from "../types/hooks/use-pagination";
 
 const usePagination = ({
-  defaultPage = 0,
+  page,
+  setPage,
   defaultRowsPerPage = 10,
 }: UsePaginationOptions) => {
-  const [page, setPage] = useState<number>(defaultPage);
   const [rowsPerPage, setRowsPerPage] = useState<number>(defaultRowsPerPage);
 
   const handleChangePage = useCallback((_event: any, newPage: number) => {

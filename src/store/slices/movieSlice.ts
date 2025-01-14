@@ -13,7 +13,7 @@ const initialState: any = {
     loading: false,
     error: null,
     filters: {
-      page: 1,
+      page: 0,
       name: "Pokemon",
       type: "",
       year: "",
@@ -35,7 +35,7 @@ export const fetchMoviesAsync: any = createAsyncThunk(
         s: filters.name,
         type: filters.type ? filters.type : undefined,
         y: filters.year ? filters.year : undefined,
-        page: filters.page,
+        page: filters.page + 1,
       });
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
@@ -63,6 +63,7 @@ const movieSlice = createSlice({
   initialState,
   reducers: {
     setFilters: (state, action) => {
+      console.log("çalıştı.");
       state.list.filters = {
         ...state.list.filters,
         ...action.payload,
